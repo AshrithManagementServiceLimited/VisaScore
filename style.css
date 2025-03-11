@@ -1,0 +1,103 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+
+div.flag-container {
+	width: 400px;
+}
+
+img.flag {
+	object-fit: fill;
+	border-radius: 50px;
+	width: 400px;
+	margin-bottom: 1.5em;
+}
+
+
+  table#example1.dataTable tbody tr:hover {
+    background-color: rgb(117, 118, 131);
+  }
+   
+  table#example1.dataTable tbody tr:hover > .sorting_1 {
+    background-color: rgb(117, 118, 131);
+  }
+
+  .dropdown-toggle{
+    background: white;
+    border: 0.5px solid rgb(199, 191, 191);
+  }
+
+  div.dataTables_wrapper div.dataTables_filter {
+    text-align: left;
+  }
+  
+.dropdown-toggle,
+.dataTables_wrapper {
+  background: white;
+  border: 0.5px solid rgb(199, 191, 191);
+}
+
+
+.dropdown-toggle:hover,
+.dataTables_wrapper:hover {
+  
+  background: white;
+  border: 0.5px solid rgb(199, 191, 191);
+}
+
+.dataTables_wrapper div.dataTables_filter {
+  text-align: left;
+}
+.hidden {
+  display: none;
+}
+
+table.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+table.table td {
+  padding: 0.3rem;
+  border: none;
+  height: 100%;
+  vertical-align: top;
+}
+
+
+.dataTables_wrapper .dataTables_paginate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dataTables_wrapper .dataTables_filter input[type="search"] {
+height: 40px; 
+font-size: 16px;
+padding: 6px 12px; 
+border-radius: 6px; 
+}
+
+.table-header {
+  background-color: #F8F9FA;
+}
+
+p.shortage-occupation-description {
+	background-color: #eee;
+}
+
+.checkboxShortage{
+  padding-right: 100px;
+}
+
+.bi-check-circle::before { content: "\f26b"; }
