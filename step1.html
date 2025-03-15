@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Visa Points Calculator</title>
+    <link rel="stylesheet" href="lib/bootstrap.css">
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="text-center">
+            <h1>Visa Points Calculator Step-1</h1>
+        </div>
+        
+        <form id="visaForm">
+            <div class="row">
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="candidateName">Candidate's Name:</label>
+                <input type="text" class="form-control" id="candidateName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="contactNumber">Contact Number:</label>
+                <input type="tel" class="form-control" id="contactNumber" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" class="form-control" id="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email ID:</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label>Highest Education:</label><br>
+                <input type="radio" name="education" value="10th"> 10th<br>
+                <input type="radio" name="education" value="12th"> 12th<br>
+                <input type="radio" name="education" value="Graduate"> Graduate<br>
+                <input type="radio" name="education" value="Postgraduate"> Postgraduate<br>
+                <input type="radio" name="education" value="Doctorate"> Doctorate<br>
+            </div>
+
+            <div class="form-group">
+                <label for="degree">Educational Degrees:</label>
+                <input type="text" class="form-control" id="degree">
+            </div>
+
+            <div class="form-group">
+                <label>Assets:</label><br>
+                <input type="checkbox" value="Irrigation Land"> Irrigation Land<br>
+                <input type="checkbox" value="Commercial Land"> Commercial Land<br>
+                <input type="checkbox" value="Apartment or Flat"> Apartment or Flat<br>
+                <input type="checkbox" value="House"> House<br>
+            </div>
+            </div>
+
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="currentVisaCountry">Current Visa Country(If any):</label>
+                <select class="form-control" id="currentVisaCountry">
+                    
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="newVisaCountry">Want a visa to:</label>
+                <select class="form-control" id="newVisaCountry">
+                    
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="visaRejectionCountries">Visa Rejection Countries(If any):</label>
+                <select class="form-control" id="visaRejectionCountries">
+                    
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="lastVisaRejectionDate">Last Visa Rejection Date(If any):</label>
+                <input type="date" class="form-control" id="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label>Profession:</label><br>
+                <input type="radio" name="profession" value="Student" onclick="toggleIncomeFields(false)"> Student<br>
+                <input type="radio" name="profession" value="Businessman" onclick="toggleIncomeFields(true)"> Businessman<br>
+                <input type="radio" name="profession" value="Salaried" onclick="toggleIncomeFields(true)"> Salaried Employee<br>
+            </div>
+
+            <div id="incomeFields" style="display: none;">
+                <div class="form-group">
+                    <label for="monthlyIncome">Monthly Income(In Indian Rupees):</label>
+                    <input type="text" class="form-control" id="monthlyIncome">
+                </div>
+                <div class="form-group">
+                    <label>Income Type:</label><br>
+                    <input type="checkbox" value="Business"> Business<br>
+                    <input type="checkbox" value="Salaried"> Salaried<br>
+                    <input type="checkbox" value="Other"> Other<br>
+                </div>
+            </div>
+
+            </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button type="submit" class="btn btn-primary">Step-2</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const countries = ["None", "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Australia", "Austria", "Bangladesh", "Belgium", "Brazil", "Canada", "China", "Denmark", "Egypt", "Finland", "France", "Germany", "India", "Italy", "Japan", "Mexico", "Netherlands", "Norway", "Pakistan", "Russia", "Saudi Arabia", "South Africa", "Spain", "Sweden", "Switzerland", "United Kingdom", "United States"];
+        
+        function populateCountries(selectId) {
+            const selectElement = document.getElementById(selectId);
+            countries.forEach(country => {
+                const option = document.createElement('option');
+                option.value = country;
+                option.textContent = country;
+                selectElement.appendChild(option);
+            });
+        }
+
+        populateCountries('currentVisaCountry');
+        populateCountries('newVisaCountry');
+        populateCountries('visaRejectionCountries');
+
+        function toggleIncomeFields(show) {
+            document.getElementById('incomeFields').style.display = show ? 'block' : 'none';
+        }
+
+
+        function toggleIncomeFields(show) {
+            document.getElementById('incomeFields').style.display = show ? 'block' : 'none';
+        }
+
+        document.getElementById('visaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            fetch('https://script.google.com/macros/s/AKfycbzNa8ztNqXmsfi1F07F8Zx0l8SS9TReALmzzWopd2egtbzI5tLyMTs519c9Cy_VTHM79g/exec', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => {
+                alert('Data submitted successfully');
+                window.location.href = '/stepcountries.html';
+            })
+            .catch(error => alert('Error submitting data'));
+        });
+    </script>
+</body>
+</html>
