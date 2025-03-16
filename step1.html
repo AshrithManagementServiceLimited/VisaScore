@@ -170,7 +170,12 @@
         body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' }
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(responseJson => {
         if (responseJson.result === "success") {
             alert('Data submitted successfully');
