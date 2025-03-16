@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Visa Points Calculator</title>
-    <link rel="stylesheet" href="bootstrap.css">
-    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap.css">
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-light">
@@ -143,25 +143,44 @@
         }
 
         document.getElementById('visaForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+    e.preventDefault();
 
-            const formData = new FormData(e.target);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
+    const formData = new FormData(e.target);
+    let data = {};
 
-            fetch('https://script.google.com/macros/s/AKfycbzNa8ztNqXmsfi1F07F8Zx0l8SS9TReALmzzWopd2egtbzI5tLyMTs519c9Cy_VTHM79g/exec', {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers: { 'Content-Type': 'application/json' }
-            })
-            .then(response => {
-                alert('Data submitted successfully');
-                window.location.href = '/stepcountries.html';
-            })
-            .catch(error => alert('Error submitting data'));
-        });
+    // Convert FormData to JSON Object
+    formData.forEach((value, key) => {
+        if (data[key]) {
+            if (Array.isArray(data[key])) {
+                data[key].push(value);
+            } else {
+                data[key] = [data[key], value];
+            }
+        } else {
+            data[key] = value;
+        }
+    });
+
+    // Collect checked checkboxes manually
+    data['assets'] = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+
+    fetch('https://script.google.com/macros/s/AKfycbzNa8ztNqXmsfi1F07F8Zx0l8SS9TReALmzzWopd2egtbzI5tLyMTs519c9Cy_VTHM79g/exec', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(responseJson => {
+        if (responseJson.result === "success") {
+            alert('Data submitted successfully');
+            window.location.href = '/stepcountries.html';
+        } else {
+            alert('Error in Google Apps Script: ' + JSON.stringify(responseJson));
+        }
+    })
+    .catch(error => alert('Error submitting data: ' + error.message));
+});
+
     </script>
 </body>
 </html>
