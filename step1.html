@@ -164,7 +164,7 @@
     // Collect checked checkboxes manually
     data['assets'] = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
 
-    fetch('https://script.google.com/macros/s/AKfycbzNa8ztNqXmsfi1F07F8Zx0l8SS9TReALmzzWopd2egtbzI5tLyMTs519c9Cy_VTHM79g/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbw4B_2GGFjKvPabQR0BZSVrs7ikQXBaGWUB0PrLA9yS6NJm0qCLZXYYBXiwncvfE4hJ5w/exec', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' }
