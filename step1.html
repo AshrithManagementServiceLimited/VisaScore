@@ -166,9 +166,9 @@
 
     fetch('https://script.google.com/macros/s/AKfycbxOF8FLSlEd1sVmineXKQtph2Ix1RokQcJ3VuCYR3veLyi7xo98h3eW0zTvQN_fFnNK/exec', {
         method: 'POST',
-         mode: 'cors',  // Ensure CORS mode is enabled
+         //mode: 'cors',  // Ensure CORS mode is enabled
         body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
+        //headers: { 'Content-Type': 'application/json' }
     })
     .then(response => {
         if (!response.ok) {
