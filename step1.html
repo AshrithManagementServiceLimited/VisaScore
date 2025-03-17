@@ -19,22 +19,22 @@
             <div class="col-md-6">
             <div class="form-group">
                 <label for="candidateName">Candidate's Name:</label>
-                <input type="text" class="form-control" id="candidateName" required>
+                <input type="text" class="form-control" id="candidateName" name="candidateName" required>
             </div>
 
             <div class="form-group">
                 <label for="contactNumber">Contact Number:</label>
-                <input type="tel" class="form-control" id="contactNumber" required>
+                <input type="tel" class="form-control" id="contactNumber" name="contactNumber" required>
             </div>
 
             <div class="form-group">
                 <label for="dob">Date of Birth:</label>
-                <input type="date" class="form-control" id="dob" required>
+                <input type="date" class="form-control" id="dob" name="dob" required>
             </div>
 
             <div class="form-group">
                 <label for="email">Email ID:</label>
-                <input type="email" class="form-control" id="email" required>
+                <input type="email" class="form-control" id="email" name="email" required>
             </div>
 
             <div class="form-group">
@@ -48,7 +48,7 @@
 
             <div class="form-group">
                 <label for="degree">Educational Degrees:</label>
-                <input type="text" class="form-control" id="degree">
+                <input type="text" class="form-control" id="degree" name="degree">
             </div>
 
             <div class="form-group">
@@ -63,28 +63,28 @@
             <div class="col-md-6">
             <div class="form-group">
                 <label for="currentVisaCountry">Current Visa Country(If any):</label>
-                <select class="form-control" id="currentVisaCountry">
+                <select class="form-control" id="currentVisaCountry" name="currentVisaCountry">
                     
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="newVisaCountry">Want a visa to:</label>
-                <select class="form-control" id="newVisaCountry">
+                <select class="form-control" id="newVisaCountry" name="newVisaCountry">
                     
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="visaRejectionCountries">Visa Rejection Countries(If any):</label>
-                <select class="form-control" id="visaRejectionCountries">
+                <select class="form-control" id="visaRejectionCountries" name="visaRejectionCountries">
                     
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="lastVisaRejectionDate">Last Visa Rejection Date(If any):</label>
-                <input type="date" class="form-control" id="dob" required>
+                <input type="date" class="form-control" id="dob" name="lastVisaRejectionDate">
             </div>
 
             <div class="form-group">
@@ -97,7 +97,7 @@
             <div id="incomeFields" style="display: none;">
                 <div class="form-group">
                     <label for="monthlyIncome">Monthly Income(In Indian Rupees):</label>
-                    <input type="text" class="form-control" id="monthlyIncome">
+                    <input type="text" class="form-control" id="monthlyIncome" name="monthlyIncome">
                 </div>
                 <div class="form-group">
                     <label>Income Type:</label><br>
@@ -149,47 +149,21 @@
     let data = {};
 
        // Collect all input, select, and textarea values
-    // form.querySelectorAll('input, select, textarea').forEach(element => {
-    //     if (element.type === 'checkbox') {
-    //         if (!data[element.name]) {
-    //             data[element.name] = [];
-    //         }
-    //         if (element.checked) {
-    //             data[element.name].push(element.value);
-    //         }
-    //     } else if (element.type === 'radio') {
-    //         if (element.checked) {
-    //             data[element.name] = element.value;
-    //         }
-    //     } else {
-    //         data[element.id] = element.value; // Use ID instead of name
-    //     }
-    // });
-
-            // Convert FormData to JSON Object
-    formData.forEach((value, key) => {
-        if (data[key]) {
-            if (Array.isArray(data[key])) {
-                data[key].push(value);
-            } else {
-                data[key] = [data[key], value];
+    form.querySelectorAll('input, select, textarea').forEach(element => {
+        if (element.type === 'checkbox') {
+            if (!data[element.name]) {
+                data[element.name] = [];
+            }
+            if (element.checked) {
+                data[element.name].push(element.value);
+            }
+        } else if (element.type === 'radio') {
+            if (element.checked) {
+                data[element.name] = element.value;
             }
         } else {
-            data[key] = value;
+            data[element.id] = element.value; // Use ID instead of name
         }
-    });
-
-    // Collect checked checkboxes manually
-    data['assets'] = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
-
- // Collect selected radio button values properly
-    document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
-        data[radio.name] = radio.value;
-    });
-
-    // Collect dropdown values (select elements)
-    document.querySelectorAll('select').forEach(select => {
-        data[select.id] = select.value;
     });
 
     console.log("Form Data:", data); // Debugging: Check collected data
