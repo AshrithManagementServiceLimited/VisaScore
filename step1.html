@@ -162,13 +162,13 @@
                 data[element.name] = element.value;
             }
         } else {
-            data[element.id] = element.value; // Use ID instead of name
+            data[element.name] = element.value; // Use ID instead of name
         }
     });
 
     console.log("Form Data:", data); // Debugging: Check collected data
             
-    fetch('https://script.google.com/macros/s/AKfycbzQ42LXnMpwq3JSzKgeScHpVNv5HGN36R1kIqB_E-rCR26SoiXerAsD0LihjlH2zS8Q/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbxOF8FLSlEd1sVmineXKQtph2Ix1RokQcJ3VuCYR3veLyi7xo98h3eW0zTvQN_fFnNK/exec', {
         method: 'POST',
          //mode: 'cors',  // Ensure CORS mode is enabled
         body: JSON.stringify(data),
