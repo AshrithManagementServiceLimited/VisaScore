@@ -142,13 +142,13 @@
             document.getElementById('incomeFields').style.display = show ? 'block' : 'none';
         }
 
-        document.getElementById('visaForm').addEventListener('submit', function(e) {
+document.getElementById('visaForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
+    const form = e.target; // Fix: Define the form properly
     let data = {};
 
-       // Collect all input, select, and textarea values
+    // Collect all input, select, and textarea values
     form.querySelectorAll('input, select, textarea').forEach(element => {
         if (element.type === 'checkbox') {
             if (!data[element.name]) {
@@ -162,17 +162,16 @@
                 data[element.name] = element.value;
             }
         } else {
-            data[element.id] = element.value; // Use ID instead of name
+            data[element.name] = element.value; // Use 'name' instead of 'id' for proper mapping
         }
     });
 
     console.log("Form Data:", data); // Debugging: Check collected data
-            
+
     fetch('https://script.google.com/macros/s/AKfycbxOF8FLSlEd1sVmineXKQtph2Ix1RokQcJ3VuCYR3veLyi7xo98h3eW0zTvQN_fFnNK/exec', {
         method: 'POST',
-         //mode: 'cors',  // Ensure CORS mode is enabled
+        headers: { 'Content-Type': 'application/json' }, // Ensure correct JSON format
         body: JSON.stringify(data),
-        //headers: { 'Content-Type': 'application/json' }
     })
     .then(response => {
         if (!response.ok) {
@@ -190,6 +189,7 @@
     })
     .catch(error => alert('Error submitting data: ' + error.message));
 });
+
 
     </script>
 </body>
