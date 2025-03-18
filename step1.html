@@ -52,11 +52,11 @@
             </div>
 
             <div class="form-group">
-                <label>Assets:</label><br>
-                <input type="checkbox" value="Irrigation Land"> Irrigation Land<br>
-                <input type="checkbox" value="Commercial Land"> Commercial Land<br>
-                <input type="checkbox" value="Apartment or Flat"> Apartment or Flat<br>
-                <input type="checkbox" value="House"> House<br>
+            <label>Assets:</label><br>
+                <input type="checkbox" name="assets" value="Irrigation Land"> Irrigation Land<br>
+                <input type="checkbox" name="assets" value="Commercial Land"> Commercial Land<br>
+                <input type="checkbox" name="assets" value="Apartment or Flat"> Apartment or Flat<br>
+                <input type="checkbox" name="assets" value="House"> House<br>
             </div>
             </div>
 
@@ -100,10 +100,10 @@
                     <input type="text" class="form-control" id="monthlyIncome" name="monthlyIncome">
                 </div>
                 <div class="form-group">
-                    <label>Income Type:</label><br>
-                    <input type="checkbox" value="Business"> Business<br>
-                    <input type="checkbox" value="Salaried"> Salaried<br>
-                    <input type="checkbox" value="Other"> Other<br>
+                <label>Income Type:</label><br>
+                    <input type="checkbox" name="incomeType" value="Business"> Business<br>
+                    <input type="checkbox" name="incomeType" value="Salaried"> Salaried<br>
+                    <input type="checkbox" name="incomeType" value="Other"> Other<br>
                 </div>
             </div>
 
@@ -166,7 +166,7 @@ document.getElementById('visaForm').addEventListener('submit', function(e) {
         }
     });
 
-    console.log("Form Data:", data); // Debugging: Check collected data
+    console.log("Form Data:", JSON.stringify(data)); // Debugging: Check collected data
 
     fetch('https://script.google.com/macros/s/AKfycbxOF8FLSlEd1sVmineXKQtph2Ix1RokQcJ3VuCYR3veLyi7xo98h3eW0zTvQN_fFnNK/exec', {
         method: 'POST',
