@@ -170,7 +170,7 @@ document.getElementById('visaForm').addEventListener('submit', function(e) {
 
     fetch('https://script.google.com/macros/s/AKfycbxOF8FLSlEd1sVmineXKQtph2Ix1RokQcJ3VuCYR3veLyi7xo98h3eW0zTvQN_fFnNK/exec', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' }, // Ensure correct JSON format
+        //headers: { 'Content-Type': 'application/json' }, // Ensure correct JSON format
         body: JSON.stringify(data),
     })
     .then(response => {
