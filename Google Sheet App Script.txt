@@ -1,0 +1,39 @@
+function doPost(e) {
+  try {
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+    const data = JSON.parse(e.postData.contents);
+
+    const values = [
+      data['candidateName'],
+      data['contactNumber'],
+      data['dob'],
+      data['email'],
+      data['education'],
+      JSON.stringify(data['assets']),  // Convert assets to JSON
+      data['currentVisaCountry'],
+      data['newVisaCountry'],
+      data['visaRejectionCountries'],
+      data['lastVisaRejectionDate'],
+      data['degree'],
+      data['profession'],
+      JSON.stringify(incomeType),  // Store incomeType as JSON string
+      data['monthlyIncome']
+    ];
+
+    sheet.appendRow(values);
+
+    // ✅ Return a response with proper CORS headers
+    return ContentService.createTextOutput(JSON.stringify({ result: 'success' }))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({ result: 'error', message: error.message }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// ✅ Handle CORS Preflight Requests (OPTIONS)
+function doGet(e) {
+  return ContentService.createTextOutput("")
+    .setMimeType(ContentService.MimeType.TEXT)
+}
