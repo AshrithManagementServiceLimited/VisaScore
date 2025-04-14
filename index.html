@@ -43,7 +43,35 @@
             max-height: 160px; /* Set a maximum height for the container */
             overflow: hidden; /* Hide overflow if necessary */
         }
+
+        .counter-wrapper {
+        background: url('/img/counter-bg.png') no-repeat center center;
+        background-size: cover;
+        padding: 40px 60px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        text-align: center;
+        color: #fff;
+        }
+
+        .counter-wrapper p {
+        font-size: 20px;
+        margin: 0 0 10px;
+        font-weight: 500;
+        }
+
+        #counter {
+        font-size: 48px;
+        font-weight: bold;
+        color: #ffeb3b;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        }
     </style>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+
  </head>
  <body class="bg-black text-white">
   
@@ -314,8 +342,34 @@
         </div>
     </div>
    </div>
-   
 
+   <div class="counter-wrapper">
+    <p>Total Visitors:</p>
+    <div id="counter">...</div>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA136rheDB8xRn49RrkzoN17e6xqmMXvig",
+      authDomain: "checkyourvisascore-counter.firebaseapp.com",
+      projectId: "checkyourvisascore-counter",
+      storageBucket: "checkyourvisascore-counter.firebasestorage.app",
+      messagingSenderId: "227139377171",
+      appId: "1:227139377171:web:9f51c2f3099fcff11787e6",
+      databaseURL: "https://checkyourvisascore-counter-default-rtdb.firebaseio.com"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const counterRef = db.ref("visitorCount");
+
+    counterRef.transaction(current => (current || 0) + 1);
+    counterRef.on("value", snapshot => {
+      const count = snapshot.val();
+      document.getElementById("counter").textContent = count;
+    });
+   </script>  
+  
   </body> 
  </body>
 </html>
